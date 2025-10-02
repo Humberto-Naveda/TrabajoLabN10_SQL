@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 27, 2025 at 01:05 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 02-10-2025 a las 23:03:16
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `biblioteca`
+-- Base de datos: `biblioteca`
 --
+CREATE DATABASE IF NOT EXISTS `biblioteca` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `biblioteca`;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comentario`
+-- Estructura de tabla para la tabla `comentario`
 --
 
 CREATE TABLE `comentario` (
@@ -35,7 +37,7 @@ CREATE TABLE `comentario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `comentario`
+-- Volcado de datos para la tabla `comentario`
 --
 
 INSERT INTO `comentario` (`idComentario`, `idLibro`, `idMiembro`, `contenido`) VALUES
@@ -46,7 +48,7 @@ INSERT INTO `comentario` (`idComentario`, `idLibro`, `idMiembro`, `contenido`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `libro`
+-- Estructura de tabla para la tabla `libro`
 --
 
 CREATE TABLE `libro` (
@@ -57,7 +59,7 @@ CREATE TABLE `libro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `libro`
+-- Volcado de datos para la tabla `libro`
 --
 
 INSERT INTO `libro` (`idLibro`, `titulo`, `autor`, `genero`) VALUES
@@ -69,7 +71,7 @@ INSERT INTO `libro` (`idLibro`, `titulo`, `autor`, `genero`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `miembro`
+-- Estructura de tabla para la tabla `miembro`
 --
 
 CREATE TABLE `miembro` (
@@ -80,7 +82,7 @@ CREATE TABLE `miembro` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `miembro`
+-- Volcado de datos para la tabla `miembro`
 --
 
 INSERT INTO `miembro` (`idMiembro`, `nombre`, `direccion`, `correo`) VALUES
@@ -92,7 +94,7 @@ INSERT INTO `miembro` (`idMiembro`, `nombre`, `direccion`, `correo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `prestamo`
+-- Estructura de tabla para la tabla `prestamo`
 --
 
 CREATE TABLE `prestamo` (
@@ -104,7 +106,7 @@ CREATE TABLE `prestamo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `prestamo`
+-- Volcado de datos para la tabla `prestamo`
 --
 
 INSERT INTO `prestamo` (`idPrestamo`, `idLibro`, `idMiembro`, `fechaP`, `fechaD`) VALUES
@@ -113,11 +115,11 @@ INSERT INTO `prestamo` (`idPrestamo`, `idLibro`, `idMiembro`, `fechaP`, `fechaD`
 (3, 3, 3, '2025-02-20', '2025-03-01');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `comentario`
+-- Indices de la tabla `comentario`
 --
 ALTER TABLE `comentario`
   ADD PRIMARY KEY (`idComentario`),
@@ -125,19 +127,19 @@ ALTER TABLE `comentario`
   ADD KEY `idMiembro` (`idMiembro`);
 
 --
--- Indexes for table `libro`
+-- Indices de la tabla `libro`
 --
 ALTER TABLE `libro`
   ADD PRIMARY KEY (`idLibro`);
 
 --
--- Indexes for table `miembro`
+-- Indices de la tabla `miembro`
 --
 ALTER TABLE `miembro`
   ADD PRIMARY KEY (`idMiembro`);
 
 --
--- Indexes for table `prestamo`
+-- Indices de la tabla `prestamo`
 --
 ALTER TABLE `prestamo`
   ADD PRIMARY KEY (`idPrestamo`),
@@ -145,46 +147,46 @@ ALTER TABLE `prestamo`
   ADD KEY `idMiembro` (`idMiembro`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `comentario`
+-- AUTO_INCREMENT de la tabla `comentario`
 --
 ALTER TABLE `comentario`
   MODIFY `idComentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `libro`
+-- AUTO_INCREMENT de la tabla `libro`
 --
 ALTER TABLE `libro`
   MODIFY `idLibro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `miembro`
+-- AUTO_INCREMENT de la tabla `miembro`
 --
 ALTER TABLE `miembro`
   MODIFY `idMiembro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `prestamo`
+-- AUTO_INCREMENT de la tabla `prestamo`
 --
 ALTER TABLE `prestamo`
   MODIFY `idPrestamo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `comentario`
+-- Filtros para la tabla `comentario`
 --
 ALTER TABLE `comentario`
   ADD CONSTRAINT `comentario_ibfk_1` FOREIGN KEY (`idLibro`) REFERENCES `libro` (`idLibro`),
   ADD CONSTRAINT `comentario_ibfk_2` FOREIGN KEY (`idMiembro`) REFERENCES `miembro` (`idMiembro`);
 
 --
--- Constraints for table `prestamo`
+-- Filtros para la tabla `prestamo`
 --
 ALTER TABLE `prestamo`
   ADD CONSTRAINT `prestamo_ibfk_1` FOREIGN KEY (`idLibro`) REFERENCES `libro` (`idLibro`),
